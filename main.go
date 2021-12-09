@@ -61,8 +61,35 @@ func (p person) print() {
 //when we thing about our variables here everthing thats going on with that struct that we want to update,
 //we are really working with two different types of variables: pointers(adresses in memory) and value
 //when we start thinigng about pointers and how they relate to the values that they contained within; here is the rule to really remember
-//Turn pointers into value wiht *pointer
+//Turn pointers into value with *pointer
 //Turn value into addresses with &value
+
+//short cut for using receiver type of a pointer
+//Go will automaticly gets the pointer when you call it like that jim.updateName("Jimmy")
+//
 func (pointerToPerson *person) updateName(newFirstName string) {
 	(*pointerToPerson).firstName = newFirstName
 }
+
+//Gotchas with pointers - reference vs value types
+//Slice vs arrays
+//when we create a slice, go will automatically create an array and a structure that records the lenght of the slice, the capacity of the slice, and a reference to the underlying array
+//in slice data structure there is a pointer to actual underliying array(pointer to array -  that keeps the values), capacity and length
+//when you send a slice to a function, it copies the slice data structure to use in that function. But even though that data structure is copied, pointer to the actual value is still the same
+
+// func main() {
+// 	mySlice := []string{"Hi", "there", "how", "are", "you"}
+// 	updateSlice(mySlice)
+// 	fmt.Println(mySlice)
+
+// }
+
+// func updateSlice(s []string) {
+// 	s[0] = "Bye"
+// }
+
+//reference types ---> slices, maps, channels, pointers, functions
+//don't worry about pointers with reference types
+
+//value types ---> int, float, string, bool, struct
+//use pointers to change these value types in functions
